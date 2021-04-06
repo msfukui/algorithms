@@ -35,25 +35,18 @@ $ go mod init example.com/algorithms
 example:
 
 ```
-$ cd 2_sort/2_bubble_sort
-$ go test
-input  = []
-output = []
-input  = [5 9 3 1 2 8 4 7 6]
-  list(1) = [5 9 3 1 2 8 4 7 6]
-  list(2) = [1 5 9 3 2 4 8 6 7]
-  list(3) = [1 2 5 9 3 4 6 8 7]
-  list(4) = [1 2 3 5 9 4 6 7 8]
-  list(5) = [1 2 3 4 5 9 6 7 8]
-  list(6) = [1 2 3 4 5 6 9 7 8]
-  list(7) = [1 2 3 4 5 6 7 9 8]
-  list(8) = [1 2 3 4 5 6 7 8 9]
-output = [1 2 3 4 5 6 7 8 9]
-PASS
-ok  	example.com/algorithms/2_sort/2_bubble_sort	0.227s
+$ go test ./...
+ok  	example.com/algorithms/2_sort/2_bubble_sort	0.314s
+ok  	example.com/algorithms/2_sort/3_selection_sort	0.523s
+ok  	example.com/algorithms/2_sort/4_insertion_sort	0.927s
+ok  	example.com/algorithms/2_sort/5_heap_sort	1.140s
 ```
 
 ## Ref.
+
+* golangのテストはじめ - Qiita
+
+    https://qiita.com/tmzkysk/items/8bb37795ac223664d682
 
 * Go の testing パッケージの基本を理解する - Qiita
 
