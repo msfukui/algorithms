@@ -18,8 +18,6 @@ func HeapSort(list []int) (success bool, sortedList []int) {
 		_, heap = HeapAdd(heap, v)
 	}
 
-	fmt.Printf("  heap = %v\n", heap)
-
 	// ヒープから順番に要素を取得して配列に詰め込む
 	r := false
 	for i := 0; i < len(list); i++ {
