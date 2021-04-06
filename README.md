@@ -1,5 +1,7 @@
 # Algorithms, explained and illustrated
 
+![Go build & test](https://github.com/msfukui/algorithms/actions/workflows/go.yml/badge.svg)
+
 「アルゴリズム図鑑 絵で見てわかる26のアルゴリズム」(ISBN978-4-7981-4977-6) の読書メモのリポジトリです。
 
 ## Setup
