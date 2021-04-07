@@ -5,124 +5,60 @@ import (
 	"testing"
 )
 
-func TestHeapAddEmpty(t *testing.T) {
-	const success = true
-	input_list := []int{}
-	input_value := 5
-	expected := []int{5}
+func TestHeapAdd(t *testing.T) {
+	tests := []struct {
+		in_list  []int
+		in_value int
+		result   bool
+		expected []int
+	}{
+		{[]int{}, 5, true, []int{5}},
+		{[]int{1, 3, 6, 4, 8, 7}, 5, true, []int{1, 3, 5, 4, 8, 7, 6}},
+		{[]int{1, 3, 5, 4, 8, 7, 6}, 5, true, []int{1, 3, 5, 4, 8, 7, 6, 5}},
+	}
 
-	if r, actual := HeapAdd(input_list, input_value); r != success || !reflect.DeepEqual(actual, expected) {
-		t.Errorf("HeapAdd(%v, %v) = %v, %v want %v, %v", input_list, input_value, r, actual, success, expected)
+	for _, test := range tests {
+		if r, actual := HeapAdd(test.in_list, test.in_value); r != test.result || !reflect.DeepEqual(actual, test.expected) {
+			t.Errorf("HeapAdd(%v, %v) = %v, %v, want %v, %v", test.in_list, test.in_value, r, actual, test.result, test.expected)
+		}
 	}
 }
 
-func TestHeapAddSuccess(t *testing.T) {
-	const success = true
-	input_list := []int{1, 3, 6, 4, 8, 7}
-	input_value := 5
-	expected := []int{1, 3, 5, 4, 8, 7, 6}
+func TestHeapDel(t *testing.T) {
+	tests := []struct {
+		in       []int
+		result   bool
+		expected []int
+	}{
+		{[]int{}, false, []int{}},
+		{[]int{6}, true, []int{}},
+		{[]int{3, 6}, true, []int{6}},
+		{[]int{3, 7, 6}, true, []int{6, 7}},
+		{[]int{3, 7, 6, 9}, true, []int{6, 7, 9}},
+		{[]int{1, 3, 5, 4, 8, 7, 6}, true, []int{3, 4, 5, 6, 8, 7}},
+	}
 
-	if r, actual := HeapAdd(input_list, input_value); r != success || !reflect.DeepEqual(actual, expected) {
-		t.Errorf("HeapAdd(%v, %v) = %v, %v want %v, %v", input_list, input_value, r, actual, success, expected)
+	for _, test := range tests {
+		if r, actual := HeapDel(test.in); r != test.result || !reflect.DeepEqual(actual, test.expected) {
+			t.Errorf("HeapDel(%v) = %v, %v, want %v, %v", test.in, r, actual, test.result, test.expected)
+		}
 	}
 }
 
-func TestHeapAddDuplexSuccess(t *testing.T) {
-	const success = true
-	input_list := []int{1, 3, 5, 4, 8, 7, 6}
-	input_value := 5
-	expected := []int{1, 3, 5, 4, 8, 7, 6, 5}
-
-	if r, actual := HeapAdd(input_list, input_value); r != success || !reflect.DeepEqual(actual, expected) {
-		t.Errorf("HeapAdd(%v, %v) = %v, %v want %v, %v", input_list, input_value, r, actual, success, expected)
+func TestHeapSort(t *testing.T) {
+	tests := []struct {
+		in       []int
+		result   bool
+		expected []int
+	}{
+		{[]int{}, true, []int{}},
+		{[]int{5, 2, 7, 3, 6, 1, 4}, true, []int{1, 2, 3, 4, 5, 6, 7}},
+		{[]int{5, 2, 7, 3, 5, 6, 1, 4}, true, []int{1, 2, 3, 4, 5, 5, 6, 7}},
 	}
-}
 
-func TestHeapDelEmpty(t *testing.T) {
-	const failure = false
-	input_list := []int{}
-
-	if r, _ := HeapDel(input_list); r != failure {
-		t.Errorf("HeapDel(%v) = %v want %v", input_list, r, failure)
-	}
-}
-
-func TestHeapDelOne(t *testing.T) {
-	const success = true
-	input_list := []int{6}
-	expected := []int{}
-
-	if r, actual := HeapDel(input_list); r != success || !reflect.DeepEqual(actual, expected) {
-		t.Errorf("HeapDel(%v) = %v, %v want %v, %v", input_list, r, actual, success, expected)
-	}
-}
-
-func TestHeapDelTwo(t *testing.T) {
-	const success = true
-	input_list := []int{3, 6}
-	expected := []int{6}
-
-	if r, actual := HeapDel(input_list); r != success || !reflect.DeepEqual(actual, expected) {
-		t.Errorf("HeapDel(%v) = %v, %v want %v, %v", input_list, r, actual, success, expected)
-	}
-}
-
-func TestHeapDelThree(t *testing.T) {
-	const success = true
-	input_list := []int{3, 7, 6}
-	expected := []int{6, 7}
-
-	if r, actual := HeapDel(input_list); r != success || !reflect.DeepEqual(actual, expected) {
-		t.Errorf("HeapDel(%v) = %v, %v want %v, %v", input_list, r, actual, success, expected)
-	}
-}
-
-func TestHeapDelFour(t *testing.T) {
-	const success = true
-	input_list := []int{3, 7, 6, 9}
-	expected := []int{6, 7, 9}
-
-	if r, actual := HeapDel(input_list); r != success || !reflect.DeepEqual(actual, expected) {
-		t.Errorf("HeapDel(%v) = %v, %v want %v, %v", input_list, r, actual, success, expected)
-	}
-}
-
-func TestHeapDelSuccess(t *testing.T) {
-	const success = true
-	input_list := []int{1, 3, 5, 4, 8, 7, 6}
-	expected := []int{3, 4, 5, 6, 8, 7}
-
-	if r, actual := HeapDel(input_list); r != success || !reflect.DeepEqual(actual, expected) {
-		t.Errorf("HeapDel(%v) = %v, %v want %v, %v", input_list, r, actual, success, expected)
-	}
-}
-
-func TestHeapSortEmpty(t *testing.T) {
-	const success = true
-	input := []int{}
-	expected := []int{}
-
-	if r, actual := HeapSort(input); r != success || !reflect.DeepEqual(actual, expected) {
-		t.Errorf("HeapSort(%v) = %v, %v, want %v, %v", input, r, actual, success, expected)
-	}
-}
-
-func TestHeapSortSuccess(t *testing.T) {
-	const success = true
-	input := []int{5, 2, 7, 3, 6, 1, 4}
-	expected := []int{1, 2, 3, 4, 5, 6, 7}
-
-	if r, actual := HeapSort(input); r != success || !reflect.DeepEqual(actual, expected) {
-		t.Errorf("HeapSort(%v) = %v, %v, want %v, %v", input, r, actual, success, expected)
-	}
-}
-
-func TestHeapSortDuplexSuccess(t *testing.T) {
-	const success = true
-	input := []int{5, 2, 7, 3, 5, 6, 1, 4}
-	expected := []int{1, 2, 3, 4, 5, 5, 6, 7}
-
-	if r, actual := HeapSort(input); r != success || !reflect.DeepEqual(actual, expected) {
-		t.Errorf("HeapSort(%v) = %v, %v, want %v, %v", input, r, actual, success, expected)
+	for _, test := range tests {
+		if r, actual := HeapSort(test.in); r != test.result || !reflect.DeepEqual(actual, test.expected) {
+			t.Errorf("HeapSort(%v) = %v, %v, want %v, %v", test.in, r, actual, test.result, test.expected)
+		}
 	}
 }
