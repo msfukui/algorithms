@@ -4,7 +4,7 @@ import "fmt"
 
 // SelectionSort は
 // 与えられた整数のスライスから、
-// ソートの結果とバブルソートで並び替えた結果の整数のスライスを返します。
+// ソートの結果と選択ソート(背の順ソート)で並び替えた結果の整数のスライスを返します。
 // c.f. No.2-3 選択ソート
 func SelectionSort(list []int) (success bool, sortedList []int) {
 	// 返却値用のバッファを作ってコピー

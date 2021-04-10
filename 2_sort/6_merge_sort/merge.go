@@ -39,7 +39,7 @@ func MergeSort(list []int) (success bool, sortedList []int) {
 	return true, sortedList
 }
 
-// merge は
+// Merge は
 // 与えられたソート済みの2つの整数のスライスから、
 // 並び替えて1つに統合したスライスを生成して返します。
 func Merge(listA []int, listB []int) (list []int) {
