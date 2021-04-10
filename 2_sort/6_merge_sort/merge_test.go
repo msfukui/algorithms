@@ -23,3 +23,29 @@ func TestMergeSort(t *testing.T) {
 		}
 	}
 }
+
+func TestMerge(t *testing.T) {
+	tests := []struct {
+		inA      []int
+		inB      []int
+		expected []int
+	}{
+		{[]int{}, []int{}, []int{}},
+		{[]int{1}, []int{}, []int{1}},
+		{[]int{}, []int{1}, []int{1}},
+		{[]int{1}, []int{2}, []int{1, 2}},
+		{[]int{2}, []int{1}, []int{1, 2}},
+		{[]int{1, 2}, []int{3}, []int{1, 2, 3}},
+		{[]int{2, 1}, []int{3}, []int{2, 1, 3}},
+		{[]int{1}, []int{2, 3}, []int{1, 2, 3}},
+		{[]int{1}, []int{3, 2}, []int{1, 3, 2}},
+		{[]int{1, 2}, []int{2, 3}, []int{1, 2, 2, 3}},
+		{[]int{1, 2}, []int{3, 4}, []int{1, 2, 3, 4}},
+	}
+
+	for _, test := range tests {
+		if actual := Merge(test.inA, test.inB); !reflect.DeepEqual(actual, test.expected) {
+			t.Errorf("merge(%v, %v) = %v, want %v", test.inA, test.inB, actual, test.expected)
+		}
+	}
+}

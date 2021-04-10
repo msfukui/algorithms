@@ -32,7 +32,7 @@ func MergeSort(list []int) (success bool, sortedList []int) {
 
 	_, sortedListA := MergeSort(listA)           // 前半部分を再帰で最小まで分割して並び替える
 	_, sortedListB := MergeSort(listB)           // 後半部分を再帰で最小まで分割して並び替える
-	sortedList = merge(sortedListA, sortedListB) // 分割した値を並び替えて統合する
+	sortedList = Merge(sortedListA, sortedListB) // 分割した値を並び替えて統合する
 
 	fmt.Printf("output = %v\n", sortedList)
 
@@ -40,9 +40,9 @@ func MergeSort(list []int) (success bool, sortedList []int) {
 }
 
 // merge は
-// 与えられた2つの整数のスライスから、
+// 与えられたソート済みの2つの整数のスライスから、
 // 並び替えて1つに統合したスライスを生成して返します。
-func merge(listA []int, listB []int) (list []int) {
+func Merge(listA []int, listB []int) (list []int) {
 	// 返却値用のバッファを作る
 	list = make([]int, len(listA)+len(listB))
 
