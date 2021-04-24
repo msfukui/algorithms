@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestQueueZero(t *testing.T) {
+func TestQueueZeroPop(t *testing.T) {
 	in := ""
 	result := -1
 
@@ -17,7 +17,18 @@ func TestQueueZero(t *testing.T) {
 	}
 }
 
-func TestQueue(t *testing.T) {
+func TestQueueZeroEmpty(t *testing.T) {
+	result := true
+
+	var q Queue
+	q.init()
+
+	if r := q.empty(); r != result {
+		t.Errorf("Queue#empty() = %v want %v", r, result)
+	}
+}
+
+func TestQueuePushAndPop(t *testing.T) {
 	tests := []struct {
 		in     []string
 		result []int
@@ -43,6 +54,27 @@ func TestQueue(t *testing.T) {
 	}
 }
 
+func TestQueueEmpty(t *testing.T) {
+	tests := []struct {
+		in     []string
+		result bool
+	}{
+		{[]string{"sample"}, false},
+		{[]string{"sample1", "sample2", "sample3"}, false},
+	}
+
+	for _, test := range tests {
+		var q Queue
+		q.init()
+		for _, in := range test.in {
+			q.push(in)
+		}
+		if r := q.empty(); r != test.result {
+			t.Errorf("Queue#empty() = %v want %v", r, test.result)
+		}
+	}
+}
+
 func TestBreadthFirstSearch(t *testing.T) {
 	tests := []struct {
 		in_start string
@@ -54,31 +86,45 @@ func TestBreadthFirstSearch(t *testing.T) {
 		{"A", "G",
 			[]Graph{
 				Graph{"A", []string{"B", "C", "D"}},
-				Graph{"B", []string{"E", "F"}},
-				Graph{"C", []string{"H"}},
-				Graph{"D", []string{"I", "J"}},
-				Graph{"E", []string{"K"}},
-				Graph{"F", []string{""}},
-				Graph{"G", []string{""}},
-				Graph{"H", []string{"G"}},
-				Graph{"I", []string{""}},
-				Graph{"J", []string{"L"}},
-				Graph{"K", []string{""}},
-				Graph{"L", []string{""}}}, true},
+				Graph{"B", []string{"E", "F", "A"}},
+				Graph{"C", []string{"H", "A"}},
+				Graph{"D", []string{"I", "J", "A"}},
+				Graph{"E", []string{"K", "B"}},
+				Graph{"F", []string{"B"}},
+				Graph{"G", []string{"H"}},
+				Graph{"H", []string{"G", "C"}},
+				Graph{"I", []string{"D"}},
+				Graph{"J", []string{"L", "D"}},
+				Graph{"K", []string{"E"}},
+				Graph{"L", []string{"J"}}}, true},
 		{"B", "L",
 			[]Graph{
 				Graph{"A", []string{"B", "C", "D"}},
-				Graph{"B", []string{"E", "F"}},
-				Graph{"C", []string{"H"}},
+				Graph{"B", []string{"E", "F", "A"}},
+				Graph{"C", []string{"H", "A"}},
+				Graph{"D", []string{"I", "J", "A"}},
+				Graph{"E", []string{"K", "B"}},
+				Graph{"F", []string{"B"}},
+				Graph{"G", []string{"H"}},
+				Graph{"H", []string{"G", "C"}},
+				Graph{"I", []string{"D"}},
+				Graph{"J", []string{"L", "D"}},
+				Graph{"K", []string{"E"}},
+				Graph{"L", []string{"J"}}}, true},
+		{"B", "I",
+			[]Graph{
+				Graph{"A", []string{"B", "C"}},
+				Graph{"B", []string{"E", "F", "A"}},
+				Graph{"C", []string{"H", "A"}},
 				Graph{"D", []string{"I", "J"}},
-				Graph{"E", []string{"K"}},
-				Graph{"F", []string{""}},
-				Graph{"G", []string{""}},
-				Graph{"H", []string{"G"}},
-				Graph{"I", []string{""}},
-				Graph{"J", []string{"L"}},
-				Graph{"K", []string{""}},
-				Graph{"L", []string{""}}}, false},
+				Graph{"E", []string{"K", "B"}},
+				Graph{"F", []string{"B"}},
+				Graph{"G", []string{"H"}},
+				Graph{"H", []string{"G", "C"}},
+				Graph{"I", []string{"D"}},
+				Graph{"J", []string{"L", "D"}},
+				Graph{"K", []string{"E"}},
+				Graph{"L", []string{"J"}}}, false},
 	}
 
 	for _, test := range tests {
