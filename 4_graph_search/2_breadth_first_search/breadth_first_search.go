@@ -18,6 +18,7 @@ type Queueable interface {
 	init()              // 初期化
 	push(string)        // 積む
 	pop() (string, int) // 取り出す
+	empty() bool        // 空かどうかを判定する
 }
 
 // キューの初期化
@@ -27,8 +28,8 @@ func (q *Queue) init() {
 }
 
 // キューに積む
-func (q *Queue) push(s string) {
-	q.el = append(q.el, s)
+func (q *Queue) push(str string) {
+	q.el = append(q.el, str)
 	return
 }
 
@@ -73,9 +74,12 @@ func BreadthFirstSearch(start string, end string, graph []Graph) (result bool) {
 
 	// 探索候補がなくなるまで一つずつ探索する
 	for !green.empty() {
+		fmt.Printf("red = %v, ", red)
+		fmt.Printf("green = %v, ", green)
+		fmt.Printf("orange = %v\n", orange)
+
 		// 探索候補から一つ取り出す
 		red, _ = green.pop()
-		fmt.Printf("red = %v\n", red)
 
 		// 既に探索済みの点の場合、探索をスキップして次に進む
 		searched := false

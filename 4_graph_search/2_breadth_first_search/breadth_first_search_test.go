@@ -32,9 +32,10 @@ func TestQueuePushAndPop(t *testing.T) {
 	tests := []struct {
 		in     []string
 		result []int
+		out    []string
 	}{
-		{[]string{"sample"}, []int{0}},
-		{[]string{"sample1", "sample2", "sample3"}, []int{2, 1, 0}},
+		{[]string{"sample"}, []int{0}, []string{"sample"}},
+		{[]string{"sample1", "sample2", "sample3"}, []int{2, 1, 0}, []string{"sample1", "sample2", "sample3"}},
 	}
 
 	for _, test := range tests {
@@ -46,9 +47,9 @@ func TestQueuePushAndPop(t *testing.T) {
 		if actual := q.el; !reflect.DeepEqual(actual, test.in) {
 			t.Errorf("Queue#push(%v) = %v, want %v", test.in, actual, test.in)
 		}
-		for i, in := range test.in {
-			if actual, r := q.pop(); actual != in || r != test.result[i] {
-				t.Errorf("Queue#pop() = %v, %v want %v, %v", actual, r, in, test.result[i])
+		for i, _ := range test.in {
+			if actual, r := q.pop(); actual != test.out[i] || r != test.result[i] {
+				t.Errorf("Queue#pop() = %v, %v want %v, %v", actual, r, test.out[i], test.result[i])
 			}
 		}
 	}
