@@ -65,3 +65,7 @@ ok  	example.com/algorithms/2_sort/5_heap_sort	1.140s
 * Reviewdog を飼ってコードレビューや開発を改善しませんか
 
     http://haya14busa.com/reviewdog/
+
+* セキュアにGoを書くための「ガードレール」を置こう - 安全なGoプロダクト開発に向けた持続可能なアプローチ
+
+    https://flattsecurity.hatenablog.com/entry/go_guardrail
