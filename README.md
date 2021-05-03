@@ -53,3 +53,15 @@ ok  	example.com/algorithms/2_sort/5_heap_sort	1.140s
 * Go の testing パッケージの基本を理解する - Qiita
 
     https://qiita.com/taisa831/items/85fea8d970bcadd796b9
+
+* gosec - Golang Security Checker
+
+    https://github.com/securego/gosec
+
+* Goの静的解析ツールをgolintからstaticcheckに移行した話
+
+    https://blog.cybozu.io/entry/2021/02/26/081013
+
+* Reviewdog を飼ってコードレビューや開発を改善しませんか
+
+    http://haya14busa.com/reviewdog/
