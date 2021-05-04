@@ -47,7 +47,7 @@ func TestQueuePushAndPop(t *testing.T) {
 		if actual := q.el; !reflect.DeepEqual(actual, test.in) {
 			t.Errorf("Queue#push(%v) = %v, want %v", test.in, actual, test.in)
 		}
-		for i, _ := range test.in {
+		for i := range test.in {
 			if actual, r := q.pop(); actual != test.out[i] || r != test.result[i] {
 				t.Errorf("Queue#pop() = %v, %v want %v, %v", actual, r, test.out[i], test.result[i])
 			}

@@ -28,7 +28,7 @@ func MergeSort(list []int) (success bool, sortedList []int) {
 	listA := make([]int, f)
 	copy(listA, list[0:f])
 	listB := make([]int, l)
-	copy(listB, list[f:len(list)])
+	copy(listB, list[f:])
 
 	_, sortedListA := MergeSort(listA)           // 前半部分を再帰で最小まで分割して並び替える
 	_, sortedListB := MergeSort(listB)           // 後半部分を再帰で最小まで分割して並び替える

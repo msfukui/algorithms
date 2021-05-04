@@ -15,7 +15,7 @@ func InsertionSort(list []int) (success bool, sortedList []int) {
 
 	fmt.Printf("input  = %v\n", list)
 
-	for i, _ := range sortedList {
+	for i := range sortedList {
 		fmt.Printf("  list(%v) = %v\n", i, sortedList)
 		for j := i - 1; j >= 0; j-- {
 			fmt.Printf("    list(%v,%v) = %v\n", i, j, sortedList)

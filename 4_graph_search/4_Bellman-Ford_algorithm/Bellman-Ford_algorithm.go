@@ -80,7 +80,7 @@ func BellmanFordAlgorithm(start string, end string, graph []Graph) (route []stri
 
 		// 各頂点のコストが一度も変更されていなければ、
 		// それ以上の変更は不要なため、終了する
-		if fixFlag == false {
+		if !fixFlag {
 			break
 		}
 	}
