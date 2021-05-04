@@ -24,13 +24,11 @@ type Stackable interface {
 // スタックの初期化
 func (s *Stack) init() {
 	s.el = make([]string, 0)
-	return
 }
 
 // スタックに積む
 func (s *Stack) push(str string) {
 	s.el = append(s.el, str)
-	return
 }
 
 // スタックから取り出す
@@ -45,10 +43,7 @@ func (s *Stack) pop() (string, int) {
 
 // スタックが空かどうかを判定する(空なら真)
 func (s *Stack) empty() bool {
-	if len(s.el) == 0 {
-		return true
-	}
-	return false
+	return len(s.el) == 0
 }
 
 // DepthFirstSerch は、

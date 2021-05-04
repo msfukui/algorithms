@@ -47,7 +47,7 @@ func TestStackPushAndPop(t *testing.T) {
 		if actual := s.el; !reflect.DeepEqual(actual, test.in) {
 			t.Errorf("Stack#push(%v) = %v, want %v", test.in, actual, test.in)
 		}
-		for i, _ := range test.in {
+		for i := range test.in {
 			if actual, r := s.pop(); actual != test.out[i] || r != test.result[i] {
 				t.Errorf("Stack#pop() = %v, %v want %v, %v", actual, r, test.out[i], test.result[i])
 			}

@@ -1,9 +1,9 @@
 package quick
 
 import (
+	"crypto/rand"
 	"fmt"
-	"math/rand"
-	"time"
+	"math/big"
 )
 
 // QuickSort は
@@ -30,8 +30,8 @@ func QuickSort(list []int) (success bool, sortedList []int) {
 	}
 
 	// 乱数から pivot を設定
-	rand.Seed(time.Now().UnixNano())
-	p := rand.Intn(len(list))
+	r, _ := rand.Int(rand.Reader, big.NewInt(int64(len(list))))
+	p := r.Int64()
 	pivot := list[p]
 	fmt.Printf("pivot(%v) = %v\n", p, pivot)
 
@@ -39,7 +39,7 @@ func QuickSort(list []int) (success bool, sortedList []int) {
 	listA, listB := []int{}, []int{}
 	// pivot を基準に小さいものと大きいものに振り分ける
 	for i, v := range list {
-		if i == p {
+		if int64(i) == p {
 			continue
 		} else if v < pivot {
 			listA = append(listA, v)

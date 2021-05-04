@@ -24,13 +24,11 @@ type Queueable interface {
 // キューの初期化
 func (q *Queue) init() {
 	q.el = make([]string, 0)
-	return
 }
 
 // キューに積む
 func (q *Queue) push(str string) {
 	q.el = append(q.el, str)
-	return
 }
 
 // キューから取り出す
@@ -45,10 +43,7 @@ func (q *Queue) pop() (string, int) {
 
 // キューが空かどうかを判定する(空なら真)
 func (q *Queue) empty() bool {
-	if len(q.el) == 0 {
-		return true
-	}
-	return false
+	return len(q.el) == 0
 }
 
 // BreadthFirstSerch は、

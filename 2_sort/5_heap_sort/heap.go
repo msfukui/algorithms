@@ -24,7 +24,7 @@ func HeapSort(list []int) (success bool, sortedList []int) {
 		fmt.Printf("  heap = %v\n", heap)
 		sortedList[i] = heap[0]
 		r, heap = HeapDel(heap)
-		if r == false {
+		if !r {
 			break
 		}
 	}
